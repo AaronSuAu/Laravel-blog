@@ -40,6 +40,11 @@
 
                         </div>
                     </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-sm-12">
+                            <a href="{{ route('posts.index') }}" class="btn btn-primary btn-block">See All Posts</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

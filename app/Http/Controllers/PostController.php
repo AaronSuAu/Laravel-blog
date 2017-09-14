@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->paginate(20);
 
         return view('posts.index')->with('posts', $posts);
     }
@@ -47,6 +47,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
 
+        //for($i = 0;$i < 50; $i++){
         $post->save();
         $request->session()->flash('success','The blog post was successfully saved!');
         return redirect()->route('posts.show', $post->id);
@@ -111,6 +112,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->delete();
+        //$request->session()->flash('success','The blog post was successfully deleted!');
+
+        return redirect()->route('posts.index');
     }
 }
