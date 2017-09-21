@@ -12,6 +12,11 @@
                               style="resize:none;">{{ $post->title }}</textarea>
                 </div>
                 <div class="form-group">
+                    <label for="slug">Slug:</label>
+                    <textarea type="text" class="form-control input-lg" id="slug" name="slug" rows="1"
+                              style="resize:none;">{{ $post->slug }}</textarea>
+                </div>
+                <div class="form-group">
                     <label for="body">Body:</label>
                     <textarea type="text" class="form-control input-lg" id="body" name="body"
                               rows="10">{{ $post->body }}</textarea>

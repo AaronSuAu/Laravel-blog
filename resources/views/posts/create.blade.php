@@ -14,7 +14,11 @@
         <form method="POST" action="{{ route('posts.store') }}" data-parsley-validate>
             <div class="form-group">
                 <label name="title">Title:</label>
-                <input id="title" name="title" class="form-control" required maxlength="20">
+                <input id="title" name="title" class="form-control" required maxlength="50">
+            </div>
+            <div class="form-group">
+                <label name="slug">Slug:</label>
+                <input id="slug" name="slug" class="form-control" required maxlength="50">
             </div>
             <div class="form-group">
                 <label name="body">Post Body:</label>

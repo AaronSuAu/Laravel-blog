@@ -39,14 +39,15 @@ class PostController extends Controller
     {
         $this->validate($request, array(
             'title' => 'required|max:255',
-            'body' => 'required'
+            'body' => 'required',
+            'slug' => 'required|max:255|unique:posts,slug'
         ));
 
         // store in the database
         $post = new Post;
         $post->title = $request->title;
         $post->body = $request->body;
-
+        $post->slug = $request->slug;
         //for($i = 0;$i < 50; $i++){
         $post->save();
         $request->session()->flash('success','The blog post was successfully saved!');
@@ -89,15 +90,25 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // validate
-        $this->validate($request, array(
-            'title' => 'required|max:255',
-            'body' => 'required'
-        ));
-        // save the data
         $post = Post::find($id);
+        if($request->input('slug') == $post->slug){
+            $this->validate($request, array(
+                'title' => 'required|max:255',
+                'body' => 'required'
+            ));
+        }else{
+            $this->validate($request, array(
+                'title' => 'required|max:255',
+                'body' => 'required',
+                'slug' => 'required|alpha_dash|unique:posts,slug'
+            ));
+        }
+
+
+        // save the data
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->slug = $request->slug;
         $post->save();
         // redirect with flash data
         $request->session()->flash('success','The blog post was successfully updated!');
